@@ -7,6 +7,7 @@ public class PlayerScoreController : MonoBehaviour
     public Text scoreText; // Ссылка на текстовое поле для отображения счета
 
     private int score = 0;
+    [SerializeField] private AudioSource collectionSoundEffect;
 
     private void Start()
     {
@@ -22,6 +23,7 @@ public class PlayerScoreController : MonoBehaviour
         // Увеличиваем счет игрока на указанное количество
         score += amount;
 
+        collectionSoundEffect.Play();
         // Обновляем отображение счета в текстовом поле
         UpdateScoreText();
     }

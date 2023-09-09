@@ -8,6 +8,8 @@ public class PlayerLife : MonoBehaviour
     private Animator anim;
     public Transform respawnPoint;
     
+    [SerializeField] private AudioSource deathSoundEffect;
+    
     // Start is called before the first frame update
     private void Start()
     {
@@ -25,6 +27,7 @@ public class PlayerLife : MonoBehaviour
     private void RespawnPlayer()
     {
         anim.SetTrigger("death");
+        deathSoundEffect.Play();
         transform.position = respawnPoint.position;
         anim.SetTrigger("create");
     }

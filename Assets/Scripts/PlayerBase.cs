@@ -18,6 +18,8 @@ public abstract class PlayerBase : MonoBehaviour
     protected abstract string HorizontalInputAxis { get; }
     protected abstract string JumpInputButton { get; }
 
+    [SerializeField] private AudioSource jumpSoundEffect;
+
     private enum MovementState
     {
         idle,
@@ -42,6 +44,7 @@ public abstract class PlayerBase : MonoBehaviour
 
         if (Input.GetButtonDown(JumpInputButton) && isGrounded())
         {
+            jumpSoundEffect.Play();
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
 

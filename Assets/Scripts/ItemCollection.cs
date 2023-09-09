@@ -4,6 +4,7 @@ public class ItemScript : MonoBehaviour
 {
     public int scoreValue = 1; // Количество очков, которые предмет добавляет
 
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("player"))
@@ -13,6 +14,7 @@ public class ItemScript : MonoBehaviour
 
             if (playerScoreController != null)
             {
+                
                 // Увеличиваем счетчик игрока
                 playerScoreController.IncreaseScore(scoreValue);
 
