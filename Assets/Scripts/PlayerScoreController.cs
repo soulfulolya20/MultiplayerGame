@@ -26,9 +26,7 @@ public class PlayerScoreController : MonoBehaviour
         UpdateScoreText();
     }
 
-    private void UpdateScoreText()
-    {
+    private void UpdateScoreText() =>
         // Обновляем текстовое поле для отображения текущего счета
         scoreText.text = "Score: " + score;
-    }
 }
