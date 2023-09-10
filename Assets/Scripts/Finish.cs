@@ -21,15 +21,15 @@ public class FinishZone : MonoBehaviour
         {
             // Отключаем игрока
             GameObject player = other.gameObject;
+            player.SetActive(false);
 
-            // Находим дочернюю камеру игрока
+            // Отключаем камеру, если она есть
             Camera playerCamera = player.GetComponentInChildren<Camera>();
             if (playerCamera != null)
             {
                 playerCamera.gameObject.SetActive(false);
             }
 
-            player.SetActive(false); // Отключаем игрока
             playersInFinishZone++;
             finishSound.Play();
 
