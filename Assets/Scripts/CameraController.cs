@@ -88,7 +88,7 @@ public class CameraController : MonoBehaviour
             case 4:
                 if (playerIndex == 0)
                 {
-                    return new Rect(0f, 0f, 0.5f, 0.5f);
+                    return new Rect(0f, 0.5f, 0.5f, 0.5f);
                 }
                 else if (playerIndex == 1)
                 {
@@ -97,7 +97,7 @@ public class CameraController : MonoBehaviour
                 }
                 else if (playerIndex == 2)
                 {
-                    return new Rect(0f, 0.5f, 0.5f, 0.5f);
+                    return new Rect(0f, 0f, 0.5f, 0.5f);
                 }
                 else
                 {
