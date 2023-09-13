@@ -588,7 +588,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &58558608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -675,30 +675,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &58558612
-MonoBehaviour:
+--- !u!156049354 &58558612
+Grid:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 58558607}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 0
-  m_StartCorner: 0
-  m_StartAxis: 0
-  m_CellSize: {x: 150, y: 100}
-  m_Spacing: {x: 250, y: 200}
-  m_Constraint: 0
-  m_ConstraintCount: 2
+  m_CellSize: {x: 0, y: 100, z: 1}
+  m_CellGap: {x: 0, y: 0, z: 0}
+  m_CellLayout: 0
+  m_CellSwizzle: 0
 --- !u!4 &78991721 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8141660965166979733, guid: 27deeb71b277d18418c1079fb8af6299, type: 3}
@@ -135158,8 +135146,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 75, y: -50}
-  m_SizeDelta: {x: 150, y: 100}
+  m_AnchoredPosition: {x: 662, y: -69.87564}
+  m_SizeDelta: {x: 277, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &937762448
 MonoBehaviour:
@@ -135194,7 +135182,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Score: 0'
+  m_Text: 
 --- !u!222 &937762449
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -135242,8 +135230,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 75, y: -350}
-  m_SizeDelta: {x: 150, y: 100}
+  m_AnchoredPosition: {x: 661.7, y: -225}
+  m_SizeDelta: {x: 277, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &943079723
 MonoBehaviour:
@@ -135278,7 +135266,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Score: 0'
+  m_Text: 
 --- !u!222 &943079724
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -135885,8 +135873,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 475, y: -350}
-  m_SizeDelta: {x: 150, y: 100}
+  m_AnchoredPosition: {x: 662, y: -309}
+  m_SizeDelta: {x: 277, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1207599381
 MonoBehaviour:
@@ -135921,7 +135909,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Score: 0'
+  m_Text: 
 --- !u!222 &1207599382
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -136544,8 +136532,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 475, y: -200}
-  m_SizeDelta: {x: 150, y: 100}
+  m_AnchoredPosition: {x: 661, y: -234}
+  m_SizeDelta: {x: 277, y: 60}
   m_Pivot: {x: 0.5, y: -1}
 --- !u!114 &1488178409
 MonoBehaviour:
@@ -136580,7 +136568,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Score: 0'
+  m_Text: 
 --- !u!222 &1488178410
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -136673,7 +136661,7 @@ GameObject:
   - component: {fileID: 1673593301}
   - component: {fileID: 1673593304}
   m_Layer: 0
-  m_Name: Player4
+  m_Name: Player2
   m_TagString: player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -137360,6 +137348,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf29cca83e642946851eda37d676c7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPlaceTexts:
+  - {fileID: 937762448}
+  - {fileID: 1488178409}
+  - {fileID: 943079723}
+  - {fileID: 1207599381}
 --- !u!82 &1829064044
 AudioSource:
   m_ObjectHideFlags: 0
@@ -146798,7 +146791,7 @@ GameObject:
   - component: {fileID: 2111092375}
   - component: {fileID: 2111092378}
   m_Layer: 0
-  m_Name: Player2
+  m_Name: Player4
   m_TagString: player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
