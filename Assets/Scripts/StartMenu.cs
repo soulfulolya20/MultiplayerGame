@@ -8,7 +8,7 @@ public class MenuScript : MonoBehaviour
     {
         // Сохраняем количество игроков в PlayerPrefs
         PlayerPrefs.SetInt("NumPlayers", numPlayers);
-        PlayerPrefs.Save();
+       // PlayerPrefs.Save();
         
         Camera mainCamera = Camera.main;
         if (mainCamera != null)
@@ -17,10 +17,7 @@ public class MenuScript : MonoBehaviour
         }
         
         // Переходим на сцену SampleScene
-        SceneManager.LoadScene("SampleScene");
-        if (SceneManager.GetActiveScene().name == "StartMenu")
-        {
-            
-        }
+        SceneManager.LoadSceneAsync("SampleScene");
+        
     }
 }
