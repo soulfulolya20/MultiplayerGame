@@ -31,6 +31,7 @@ public class FinishZone : NetworkBehaviour
 
                 // Отключаем возможность движения
                 PlayerBase playerController = other.GetComponent<PlayerBase>();
+                
                 if (playerController != null)
                 {
                     playerController.enabled = false;

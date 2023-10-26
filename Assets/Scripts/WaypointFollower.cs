@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class WaypointFollower : MonoBehaviour
+public class WaypointFollower : NetworkBehaviour
 {
     [SerializeField] private GameObject[] waypoints;
     private int currentWaipointIndex = 0;
 
     [SerializeField] private float speed = 2f;
+    private Vector2 transformPosition;
 
     private void Update()
     {
@@ -21,7 +22,23 @@ public class WaypointFollower : MonoBehaviour
             }
         }
 
-        transform.position = Vector2.MoveTowards(transform.position, waypoints[currentWaipointIndex].transform.position,
+        transformPosition = Vector2.MoveTowards(transform.position, waypoints[currentWaipointIndex].transform.position,
             Time.deltaTime * speed);
+        transform.position = transformPosition;
+        SendPositionServerRpc();
     }
+
+    [ServerRpc]
+    void SendPositionServerRpc()
+    {
+        transform.position = transformPosition;
+        HandlePositionClientRpc();
+    }
+
+    [ClientRpc]
+    void HandlePositionClientRpc()
+    {
+        if(IsLocalPlayer) return;
+        transform.position = transformPosition;
+    } 
 }
