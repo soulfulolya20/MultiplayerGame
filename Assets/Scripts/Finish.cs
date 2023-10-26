@@ -1,77 +1,99 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class FinishZone : MonoBehaviour
+public class FinishZone : NetworkBehaviour
 {
-    private int playersInFinishZone = 0;
-    private int totalPlayers;
+    private List<NetworkObject> playersInFinish = new List<NetworkObject>();
+    private List<NetworkObject> allPlayers = new List<NetworkObject>();
     private AudioSource finishSound;
 
-    public Text[] playerPlaceTexts; // Массив текстовых полей для вывода мест игроков
-    private int[] playerPlaces; // Массив для хранения мест игроков
+    public Text[] playerPlaceTexts;
 
     private void Start()
     {
-        // Автоматически определяем количество игроков с тегом "Player"
-        GameObject[] players = GameObject.FindGameObjectsWithTag("player");
-        totalPlayers = players.Length;
         finishSound = GetComponent<AudioSource>();
-
-        // Инициализируем массив мест игроков
-        playerPlaces = new int[totalPlayers];
-
-        // Инициализируем текстовые поля для вывода мест игроков
-        for (int i = 0; i < playerPlaceTexts.Length; i++)
-        {
-            playerPlaceTexts[i].text = "";
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("player"))
         {
-            // Отключаем игрока
-            GameObject player = other.gameObject;
-            player.SetActive(false);
+            NetworkObject playerNetworkObject = other.GetComponent<NetworkObject>();
 
-            // Отключаем камеру, если она есть
-            Camera playerCamera = player.GetComponentInChildren<Camera>();
-            if (playerCamera != null)
+            if (playerNetworkObject != null)
             {
-                playerCamera.gameObject.SetActive(false);
+                // Записываем игрока, достигшего финиша, в список
+                playersInFinish.Add(playerNetworkObject);
+
+                // Отключаем возможность движения
+                PlayerBase playerController = other.GetComponent<PlayerBase>();
+                if (playerController != null)
+                {
+                    playerController.enabled = false;
+                }
+
+                // Воспроизводим звук финиша
+                finishSound.Play();
+
+                // Показываем информацию о текущем игроке и его месте
+                ShowCurrentPlayerPlace(playerNetworkObject);
             }
 
-            playersInFinishZone++;
-            finishSound.Play();
-
-            // Определяем место текущего игрока по порядку финиша
-            int currentPlayerPlace = playersInFinishZone;
-
-            // Выводим информацию о текущем игроке и его месте
-            ShowCurrentPlayerPlace(player, currentPlayerPlace);
-
-            // Проверяем, если все игроки вошли в зону финиша
-            if (playersInFinishZone == totalPlayers)
+            // Если количество игроков в списке достигло общего числа игроков, переходим на стартовую сцену
+            if (playersInFinish.Count == GameManager.CountPlayers())
             {
-                // Выполняем переход в главное меню
-                SceneManager.LoadScene("StartScene");
+                ServerGameOverServerRpc();
             }
         }
     }
 
-    private void ShowCurrentPlayerPlace(GameObject player, int currentPlayerPlace)
+    private void ShowCurrentPlayerPlace(NetworkObject playerNetworkObject)
     {
-        // Выводим информацию о текущем игроке и его месте
-        for (int i = 0; i < playerPlaces.Length; i++)
+        int playerPlace = playersInFinish.IndexOf(playerNetworkObject) + 1;
+        string playerName = (playerNetworkObject.OwnerClientId + 1).ToString();
+
+        foreach (Text playerPlaceText in playerPlaceTexts)
         {
-            if (playerPlaces[i] == 0)
+            if (string.IsNullOrEmpty(playerPlaceText.text))
             {
-                playerPlaces[i] = currentPlayerPlace;
-                playerPlaceTexts[i].text = player.name + ": Place " + currentPlayerPlace;
+                playerPlaceText.text = "Player " + playerName + " took place " + playerPlace;
                 break;
             }
+        }
+    }
+
+    [ServerRpc]
+    private void ServerGameOverServerRpc()
+    {
+        RpcLoadStartSceneClientRpc();
+    }
+
+    [ClientRpc]
+    private void RpcLoadStartSceneClientRpc()
+    {
+        // Отключите всех клиентов и сервер перед переходом на стартовую сцену
+        Cleanup();
+
+        // Задержка перед переходом на стартовую сцену
+        StartCoroutine(LoadStartSceneDelayed());
+    }
+
+
+    private IEnumerator LoadStartSceneDelayed()
+    {
+        yield return new WaitForSeconds(5f);
+        SceneManager.LoadScene("StartScene");
+    }
+    
+    void Cleanup()
+    {
+        if (NetworkManager.Singleton != null)
+        {
+            Destroy(NetworkManager.Singleton.gameObject);
         }
     }
 }

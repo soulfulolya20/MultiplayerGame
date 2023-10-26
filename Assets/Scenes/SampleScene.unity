@@ -1353,7 +1353,7 @@ GameObject:
   - component: {fileID: 287892032}
   - component: {fileID: 287892031}
   - component: {fileID: 287892036}
-  - component: {fileID: 287892037}
+  - component: {fileID: 287892044}
   - component: {fileID: 287892038}
   - component: {fileID: 287892039}
   - component: {fileID: 287892040}
@@ -1526,25 +1526,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &287892037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 287892030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4db64aa8b7675934ca6381b2f6a39d77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerObject: {fileID: 287892030}
-  jumpableGround:
-    serializedVersion: 2
-    m_Bits: 64
-  movementSpeed: 7
-  jumpForce: 14
-  jumpSoundEffect: {fileID: 287892040}
 --- !u!114 &287892038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1862,6 +1843,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &287892044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287892030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cac264e8e1fe6b4ab8f669ebbc48d36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerObject: {fileID: 287892030}
+  jumpableGround:
+    serializedVersion: 2
+    m_Bits: 64
+  movementSpeed: 7
+  jumpForce: 14
+  jumpSoundEffect: {fileID: 287892040}
 --- !u!1001 &292044045
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -137314,7 +137314,8 @@ GameObject:
   - component: {fileID: 1829064046}
   - component: {fileID: 1829064045}
   - component: {fileID: 1829064044}
-  - component: {fileID: 1829064043}
+  - component: {fileID: 1829064048}
+  - component: {fileID: 1829064049}
   m_Layer: 0
   m_Name: Finish
   m_TagString: FinishZone
@@ -137322,23 +137323,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1829064043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1829064042}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cf29cca83e642946851eda37d676c7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerPlaceTexts:
-  - {fileID: 937762448}
-  - {fileID: 1488178409}
-  - {fileID: 943079723}
-  - {fileID: 1207599381}
 --- !u!82 &1829064044
 AudioSource:
   m_ObjectHideFlags: 0
@@ -137547,6 +137531,43 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1829064048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829064042}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 4062040370
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &1829064049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829064042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34644d0d27441f24e89c29eb010a3001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPlaceTexts:
+  - {fileID: 937762448}
+  - {fileID: 1488178409}
+  - {fileID: 943079723}
+  - {fileID: 1207599381}
 --- !u!4 &1838668396 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4602619962675608257, guid: f8934b092db11194fb385d129710bdaa, type: 3}

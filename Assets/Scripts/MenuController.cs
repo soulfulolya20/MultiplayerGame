@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour
@@ -6,7 +7,7 @@ public class MenuController : MonoBehaviour
     public Button oldGameButton;
     public Button localButton;
     public GameObject playerButtonsGroup; // Содержит кнопки 1player, 2player, 3player, 4player
-    public GameObject networkButtonsGroup; // Содержит кнопки host, server, client
+   
 
     private void Start()
     {
@@ -14,7 +15,6 @@ public class MenuController : MonoBehaviour
         oldGameButton.interactable = true;
         localButton.interactable = true;
         playerButtonsGroup.SetActive(false);
-        networkButtonsGroup.SetActive(false);
     }
 
     public void OnClickOldGame()
@@ -34,7 +34,7 @@ public class MenuController : MonoBehaviour
         oldGameButton.gameObject.SetActive(false);
 
         // Показываем группу с кнопками server, host, client
-        networkButtonsGroup.SetActive(true);
+        SceneManager.LoadScene("LocalGameScene");
     }
 
 }
