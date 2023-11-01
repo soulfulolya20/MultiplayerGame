@@ -4,18 +4,20 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class FinishZone : NetworkBehaviour
 {
     private List<NetworkObject> playersInFinish = new List<NetworkObject>();
-    private List<NetworkObject> allPlayers = new List<NetworkObject>();
     private AudioSource finishSound;
 
     public Text[] playerPlaceTexts;
 
+    [SerializeField] private Button exitButton;
     private void Start()
     {
         finishSound = GetComponent<AudioSource>();
+        exitButton.gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -27,7 +29,12 @@ public class FinishZone : NetworkBehaviour
             if (playerNetworkObject != null)
             {
                 // Записываем игрока, достигшего финиша, в список
-                playersInFinish.Add(playerNetworkObject);
+                if (!playersInFinish.Contains(playerNetworkObject))
+                {
+                    playersInFinish.Add(playerNetworkObject);
+                    // Показываем информацию о текущем игроке и его месте
+                    ShowCurrentPlayerPlace(playerNetworkObject);
+                }
 
                 // Отключаем возможность движения
                 PlayerBase playerController = other.GetComponent<PlayerBase>();
@@ -38,16 +45,16 @@ public class FinishZone : NetworkBehaviour
                 }
 
                 // Воспроизводим звук финиша
-                finishSound.Play();
-
-                // Показываем информацию о текущем игроке и его месте
-                ShowCurrentPlayerPlace(playerNetworkObject);
+               // finishSound.Play();
             }
 
             // Если количество игроков в списке достигло общего числа игроков, переходим на стартовую сцену
             if (playersInFinish.Count == GameManager.CountPlayers())
             {
+                exitButton.gameObject.SetActive(true);
+                NetworkManager.Singleton.SceneManager.LoadScene("StartScene", LoadSceneMode.Single);
                 ServerGameOverServerRpc();
+                
             }
         }
     }
@@ -61,7 +68,9 @@ public class FinishZone : NetworkBehaviour
         {
             if (string.IsNullOrEmpty(playerPlaceText.text))
             {
-                playerPlaceText.text = "Player " + playerName + " took place " + playerPlace;
+                // playerPlaceText.text = "Player " + playerName + " took place " + playerPlace;
+                playerPlaceText.text = "playersinfinish=" + playersInFinish.Count + " allPlayers=" +
+                                       GameManager.CountPlayers();
                 break;
             }
         }
@@ -78,7 +87,9 @@ public class FinishZone : NetworkBehaviour
     {
         // Отключите всех клиентов и сервер перед переходом на стартовую сцену
         Cleanup();
-
+        NetworkManager.Singleton.SceneManager.LoadScene("StartScene", LoadSceneMode.Single);
+        
+        SceneManager.LoadScene("StartScene");
         // Задержка перед переходом на стартовую сцену
         StartCoroutine(LoadStartSceneDelayed());
     }
@@ -86,6 +97,7 @@ public class FinishZone : NetworkBehaviour
 
     private IEnumerator LoadStartSceneDelayed()
     {
+        SceneManager.LoadScene("StartScene");
         yield return new WaitForSeconds(5f);
         SceneManager.LoadScene("StartScene");
     }
@@ -95,6 +107,12 @@ public class FinishZone : NetworkBehaviour
         if (NetworkManager.Singleton != null)
         {
             Destroy(NetworkManager.Singleton.gameObject);
+            NetworkManager.Shutdown();
         }
+    }
+    
+    public void OnExitButtonClicked()
+    {
+        SceneManager.LoadScene("StartScene");
     }
 }
